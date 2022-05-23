@@ -1,0 +1,76 @@
+<h1 class="text-center">Property Management System</h1>
+
+<table class="content-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Size</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let property of propertyList; let i = index">
+      <td>{{ i+1 }}</td>
+      <td>{{ property.fields.name }}</td>
+      <td>{{ property.fields.description }}</td>
+      <td>{{ property.fields.size }}</td>
+      <td> 
+        <a href="#deleteFlight" (click)="removeProperty(property.id)">
+          <span class="material-icons text-danger">
+            delete
+          </span>  
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="container">
+  <h3 class="text-center">Add Property</h3>
+  <div class="col-lg-8 m-auto d-block">
+    <form [formGroup]="propertyForm" (ngSubmit)="saveProperty()">
+      <div class="form-group">
+        <label>Name</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter property name"
+          formControlName="name"
+        />
+        <span class="text-danger" *ngIf="propertyForm.controls['name'].touched && !propertyForm.controls['name'].valid">*Minimum 3 characters required</span>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <input
+          type="text"
+          name="description"
+          class="form-control"
+          id="description"
+          placeholder="Enter property details"
+          formControlName="description"
+        />
+        <span class="text-danger" *ngIf="propertyForm.controls['description'].touched && !propertyForm.controls['description'].valid">*Minimum 3 characters required</span>
+
+      </div>
+      <div class="form-group">
+        <label>Size</label>
+        <input
+          type="text"
+          name="size"
+          class="form-control"
+          placeholder="Enter property size"
+          formControlName="size"
+        />
+        <span class="text-danger" *ngIf="propertyForm.controls['size'].touched && !propertyForm.controls['size'].valid">*Size is required</span>
+      </div>
+      <input
+        type="submit"
+        name="submit"
+        value="submit"
+        class="btn btn-success"
+      />
+    </form>
+  </div>
+</div>
